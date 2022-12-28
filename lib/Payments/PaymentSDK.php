@@ -169,7 +169,7 @@ class PaymentSDK
             'access_key' => $accessKey,
         );
 
-        return \Firebase\JWT\JWT::encode($data, $secretKey);
+        return \Firebase\JWT\JWT::encode($data, $secretKey, 'HS256');
     }
 
     /**
