@@ -211,13 +211,13 @@ class PaymentSDK
     public function fetchBankList()
     {
         $url = $this->_environment === 'sandbox'
-        ? 'https://api.sandbox-payments.montonio.com/pis/v2/merchants/aspsps'
-        : 'https://api.payments.montonio.com/pis/v2/merchants/aspsps';
+        ? 'https://api.sandbox-payments.montonio.com/pis/v2/merchants/payment_methods'
+        : 'https://api.payments.montonio.com/pis/v2/merchants/payment_methods';
 
         $options = array(
             'http' => array(
                 'header' => "Content-Type: application/json\r\n" .
-                "Authorization: Bearer " . MontonioPaymentsSDK::getBearerToken(
+                "Authorization: Bearer " . static::getBearerToken(
                     $this->_accessKey,
                     $this->_secretKey
                 ) . "\r\n",
