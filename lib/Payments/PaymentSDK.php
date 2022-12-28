@@ -126,7 +126,7 @@ class PaymentSDK
         $exp                = time() + (10 * 60);
         $paymentData['exp'] = $exp;
 
-        return \Firebase\JWT\JWT::encode($paymentData, $this->_secretKey);
+        return \Firebase\JWT\JWT::encode($paymentData, $this->_secretKey, 'HS256');
     }
 
     /**
