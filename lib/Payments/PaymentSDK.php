@@ -7,6 +7,7 @@ namespace Montonio\Payments;
  */
 
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 /**
  * SDK for Montonio Payments.
@@ -15,7 +16,7 @@ use Firebase\JWT\JWT;
 
 class PaymentSDK
 {
-    
+
     /**
      * Payment Data for Montonio Payment Token generation
      * @see https://payments-docs.montonio.com/#generating-the-payment-token
@@ -153,7 +154,7 @@ class PaymentSDK
     public static function decodePaymentToken($token, $secretKey)
     {
         \Firebase\JWT\JWT::$leeway = 60 * 5; // 5 minutes
-        return \Firebase\JWT\JWT::decode($token, $secretKey, array('HS256'));
+        return \Firebase\JWT\JWT::decode($token, new Key($secretKey, 'HS256'), array('HS256'));
     }
 
     /**
@@ -200,12 +201,12 @@ class PaymentSDK
     /**
      * Fetch info about banks and card processors that
      * can be shown to the customer at checkout.
-     * 
-     * Banks have different identifiers for separate regions, 
+     *
+     * Banks have different identifiers for separate regions,
      * but the identifier for card payments is uppercase CARD
      * in all regions.
      * @see MontonioPaymentsCheckout::$bankList
-     * 
+     *
      * @return array Array containing the status of the request and the banklist
      */
     public function fetchBankList()
